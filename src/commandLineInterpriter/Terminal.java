@@ -16,9 +16,8 @@ public class Terminal {
 	void ls(){
 		File file = new File(currentPath);
 		File[] dirList = file.listFiles();
-		for(int i = 0 ; i<dirList.length;i++){
-			System.out.println(dirList[i].getName());
-			
+		for(File temp :dirList){
+			System.out.println(temp.getName());
 		}
 	}
 	
