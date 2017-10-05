@@ -1,6 +1,9 @@
 package commandLineInterpriter;
 
 import java.io.File;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 
 public class Terminal {
@@ -17,9 +20,9 @@ public class Terminal {
 		currentPath = DEFULT_PATH; 
 	}
 	
-	String getCurrentPath() { return currentPath;}
+	public String getCurrentPath() { return currentPath;}
 	
-	void ls(){
+	public void ls(){
 		File file = new File(currentPath);
 		File[] dirList = file.listFiles();
 		for(File temp :dirList){
@@ -27,11 +30,20 @@ public class Terminal {
 		}
 	}
 	
-	void cd(String path) {
+	public void cd(String path) {
 		if(path.equals("")||path.equals("~")) {
 			System.setProperty("user.dir",DEFULT_PATH);
 		}
 	}
+	
+	public void getDate() {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        System.out.println(dateFormat.format(date));
+
+	}
+	
+	
 	
 	
 	
