@@ -55,8 +55,30 @@ public class Terminal {
 		else {
 			System.out.println("mkdir: cannot create directory `"+filename+"’: File exists");
 		}
+	}
+	
+	/* lam nige ncall el fn dia han4of m3aha -r wla l2 lw m3aha hanb3t 1 lw l2 0 
+	*/
+	public void rmdir(String filename, boolean r) {
+		File file = new File(currentPath + "/" + filename);
+		if(file.exists()) {
+			if(!r) {
+				file.delete(); 
+				}
+			if(r) {
+				File [] files = file.listFiles();
+				for(File temp :files) {
+					temp.delete();
+				}
+				
+			}
+		else {
+			System.out.println("mkdir: cannot delete directory `"+filename+"’: no such directory.");
+		}
+		}
 		
 	}
+	
 	
 	
 	
