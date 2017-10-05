@@ -5,10 +5,11 @@ import java.io.File;
 
 public class Terminal {
 	
+	private static final String USER_NAME=System.getProperty("user.name");
 	private static final String  DEFULT_PATH=System.getProperty("user.dir");
 	private String currentPath;
 	
-	/*@TO-DO we must add the commands here as it 
+	/*TODO we must add the commands here as it 
 	 * defined as final 
 	private static final Command commands[];
 	*/
