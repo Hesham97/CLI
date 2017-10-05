@@ -21,6 +21,12 @@ public class Terminal {
 		}
 	}
 	
+	void cd(String path) {
+		if(path.equals("")||path.equals("~")) {
+			System.setProperty("user.dir",DEFULT_PATH);
+		}
+	}
+	
 	
 	
 
