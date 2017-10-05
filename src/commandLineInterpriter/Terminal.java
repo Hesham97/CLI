@@ -12,6 +12,11 @@ public class Terminal {
 	 * defined as final 
 	private static final Command commands[];
 	*/
+	public Terminal() {
+		currentPath = DEFULT_PATH; 
+	}
+	
+	String getCurrentPath() { return currentPath;}
 	
 	void ls(){
 		File file = new File(currentPath);
