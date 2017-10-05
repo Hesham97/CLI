@@ -22,6 +22,10 @@ public class Terminal {
 	
 	public String getCurrentPath() { return currentPath;}
 	
+	//han4of han3ml eh hena hansibha kda wla  eh 
+	public void pwd() {System.out.println(currentPath);}
+
+	
 	public void ls(){
 		File file = new File(currentPath);
 		File[] dirList = file.listFiles();
@@ -42,6 +46,18 @@ public class Terminal {
         System.out.println(dateFormat.format(date));
 
 	}
+	
+	public void mkdir(String filename) {
+		File file = new File(currentPath + "/" + filename);
+		if(!file.exists()) {
+			file.mkdir();
+		}
+		else {
+			System.out.println("mkdir: cannot create directory `"+filename+"’: File exists");
+		}
+		
+	}
+	
 	
 	
 	
