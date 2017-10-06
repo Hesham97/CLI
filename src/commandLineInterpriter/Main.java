@@ -6,6 +6,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		Gui gui = new Gui();
 		Terminal t = new Terminal();
+		t.cd("Desktop");
 		t.ls();
 
 
