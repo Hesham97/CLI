@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 public class Terminal {
 	
 	private static final String USER_NAME=System.getProperty("user.name");
-	private static final String  DEFULT_PATH=System.getProperty("user.dir");
+	private static final String  DEFULT_PATH="/home/"+USER_NAME+"/";
 	private String currentPath;
 	
 	/*TODO we must add the commands here as it 
@@ -37,6 +37,7 @@ public class Terminal {
 	public void cd(String path) {
 		if(path.equals("")||path.equals("~")) {
 			System.setProperty("user.dir",DEFULT_PATH);
+			
 		}
 	}
 	
