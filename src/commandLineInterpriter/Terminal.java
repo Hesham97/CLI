@@ -17,7 +17,7 @@ public class Terminal {
 	
 	private static final String USER_NAME=System.getProperty("user.name");
 	private static final String  DEFULT_PATH="/home/"+USER_NAME+"/";
-	private String currentPath;
+	private static String currentPath;
 	
 	/*TODO we must add the commands here as it 
 	 * defined as final 
@@ -27,18 +27,21 @@ public class Terminal {
 		currentPath = DEFULT_PATH; 
 	}
 	
-	public String getCurrentPath() { return currentPath;}
-	
+	public static String getCurrentPath() { return currentPath;}
+	public static String getUserName() { return USER_NAME;}
+
 	//han4of han3ml eh hena hansibha kda wla  eh 
 	public void pwd() {System.out.println(currentPath);}
 
 	
+	
 	public void ls(){
 		File file = new File(currentPath);
 		File[] dirList = file.listFiles();
-		for(File temp :dirList){
-			System.out.println(temp.getName());
-		}
+		if(dirList!=null)
+			for(File temp :dirList){
+				System.out.println(temp.getName());
+			}
 	}
 	
 	public void cd(String path) {
@@ -176,42 +179,30 @@ public class Terminal {
 	}
 	
 
-
-private boolean createFile(String f1) throws Exception
-{
 	
-File FileName=new File(f1);
-
-
-return FileName.createNewFile();
-
-
-}
-private boolean copydir(File f1,File f2) throws Exception 
-{
-	
+	private boolean createFile(String f1) throws Exception{
 		
-		if(f1.isDirectory())
-		{
-			if(!f2.isDirectory())
-			{
+		File FileName=new File(f1);
+	
+	
+	return FileName.createNewFile();
+	}
+	private boolean copydir(File f1,File f2) throws Exception {
+	
+		if(f1.isDirectory()){
+			if(!f2.isDirectory()){
 				
-				f2.mkdir();
-				
+				f2.mkdir();		
 			}
 			
 			FileUtils.copyDirectory(f1, f2);
 			 return true;
 			
 		}
-		else
-		{
+		else{
 			System.out.println("in valid dir");
 			return false;
 		}
-	//what the fuck
-
-	
-}
+	}
 
 }
