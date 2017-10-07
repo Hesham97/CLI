@@ -63,6 +63,7 @@ public class Gui  {
 				// TODO Auto-generated method stub
 				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
 					centerTextArea.append(textArea.getText());
+					textArea.setText("> ");
 				}
 			}
 		});
