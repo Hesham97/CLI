@@ -214,4 +214,74 @@ private boolean copydir(File f1,File f2) throws Exception
 	
 }
 
+public boolean mv(String fileNameOne,String fileNameTwo,int casesCounter ) throws Exception
+{
+	File fileOne ;
+	File fileTwo;
+	
+	 fileOne = new File(currentPath+ "/" + fileNameOne);
+	fileTwo= new File( currentPath+ "/" + fileNameTwo);
+	if(casesCounter==1)
+
+	{
+		if(fileOne.exists())
+		{
+			this.copy(fileOne.toString(), fileTwo.toString());
+			fileOne.delete();
+		}
+		
+		else
+		{
+			return false;
+		}
+	}
+	
+	if(casesCounter==2)
+
+	{
+		if(fileOne.exists())
+		{
+			if(!fileTwo.isDirectory())
+			{
+				fileTwo.mkdir();
+			}
+			
+			this.copy(fileOne.toString(), fileTwo.toString()+fileNameOne);
+			fileOne.delete();
+		}
+		
+		else
+		{
+			return false;
+		}
+	}
+	
+	
+	if(casesCounter==3)
+
+	{
+		if(fileOne.isDirectory())
+		{
+			if(!fileTwo.isDirectory())
+			{
+				fileTwo.mkdir();
+			}
+			
+			this.copydir(fileOne, fileTwo);
+			this.rmdir(fileNameOne, true);
+		}
+		
+		else
+		{
+			return false;
+		}
+	}
+
+
+
+
+	return false;
+
+}
+
 }
