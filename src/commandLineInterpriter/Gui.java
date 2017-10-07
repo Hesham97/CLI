@@ -22,9 +22,9 @@ public class Gui  {
 	public Gui() {
 		terminal = new Terminal();
 		mainFrame = new JFrame();
-	    textArea=new JTextArea(terminal.getCurrentPath());
+	    textArea=new JTextArea(Terminal.getUserName()+" ~ :"+Terminal.getCurrentPath()+"$ ");
 	    centerTextArea= new JTextArea();
-	    path = new JLabel(terminal.getCurrentPath());
+	    path = new JLabel(Terminal.getCurrentPath());
 		mainFrame.setSize(600,350);
 
 
@@ -35,8 +35,11 @@ public class Gui  {
 		textArea.setBackground(Color.black);
 		textArea.setForeground(Color.WHITE);
 		textArea.setFont(new Font("Serif", Font.ITALIC, 14));
+		textArea.setSize(600,350);
 		
 		path.setFont(new Font("Serif", Font.ITALIC, 14));
+		path.setSize(600,350);
+
 
 		mainFrame.add(textArea,BorderLayout.SOUTH);
 		mainFrame.add(centerTextArea,BorderLayout.CENTER);
@@ -63,7 +66,7 @@ public class Gui  {
 				// TODO Auto-generated method stub
 				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
 					centerTextArea.append(textArea.getText());
-					textArea.setText("> ");
+					textArea.setText(Terminal.getUserName()+" ~ :"+Terminal.getCurrentPath()+"$ ");
 				}
 			}
 		});
