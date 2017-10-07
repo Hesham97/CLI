@@ -18,7 +18,7 @@ public class Terminal {
 	private static final String USER_NAME=System.getProperty("user.name");
 	private static final String  DEFULT_PATH="/home/"+USER_NAME+"/";
 	private static String currentPath;
-	
+	//
 	/*TODO we must add the commands here as it 
 	 * defined as final 
 	private static final Command commands[];
@@ -204,5 +204,75 @@ public class Terminal {
 			return false;
 		}
 	}
+
+public boolean mv(String fileNameOne,String fileNameTwo,int casesCounter ) throws Exception
+{
+	File fileOne ;
+	File fileTwo;
+	
+	 fileOne = new File(currentPath+ "/" + fileNameOne);
+	fileTwo= new File( currentPath+ "/" + fileNameTwo);
+	if(casesCounter==1)
+
+	{
+		if(fileOne.exists())
+		{
+			this.copy(fileOne.toString(), fileTwo.toString());
+			fileOne.delete();
+		}
+		
+		else
+		{
+			return false;
+		}
+	}
+	
+	if(casesCounter==2)
+
+	{
+		if(fileOne.exists())
+		{
+			if(!fileTwo.isDirectory())
+			{
+				fileTwo.mkdir();
+			}
+			
+			this.copy(fileOne.toString(), fileTwo.toString()+fileNameOne);
+			fileOne.delete();
+		}
+		
+		else
+		{
+			return false;
+		}
+	}
+	
+	
+	if(casesCounter==3)
+
+	{
+		if(fileOne.isDirectory())
+		{
+			if(!fileTwo.isDirectory())
+			{
+				fileTwo.mkdir();
+			}
+			
+			this.copydir(fileOne, fileTwo);
+			this.rmdir(fileNameOne, true);
+		}
+		
+		else
+		{
+			return false;
+		}
+	}
+
+
+
+
+	return false;
+
+}
 
 }
