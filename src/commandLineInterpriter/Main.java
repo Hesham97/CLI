@@ -8,7 +8,6 @@ public class Main {
 		Terminal t = new Terminal();
 		t.cd("w");
 		t.ls();
-		
 
 
 	}
