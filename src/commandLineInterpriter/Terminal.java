@@ -18,7 +18,7 @@ public class Terminal {
 	private static final String USER_NAME=System.getProperty("user.name");
 	private static final String  DEFULT_PATH="/home/"+USER_NAME+"/";
 	private static String currentPath;
-	
+	//
 	/*TODO we must add the commands here as it 
 	 * defined as final 
 	private static final Command commands[];
