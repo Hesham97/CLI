@@ -13,12 +13,12 @@ import javax.swing.JTextArea;
 
 public class Gui  {
 
-	public JFrame mainFrame;
-	public JTextArea textArea;
-	public JTextArea centerTextArea;
-	private Terminal terminal;
-	private JLabel path;
-	
+	public static JFrame mainFrame;
+	public static JTextArea textArea;
+	public static JTextArea centerTextArea;
+	private  Terminal terminal;
+	private static JLabel path;
+	Validator validator;
 	public Gui() {
 		terminal = new Terminal();
 		mainFrame = new JFrame();
@@ -26,11 +26,11 @@ public class Gui  {
 	    centerTextArea= new JTextArea();
 	    path = new JLabel(Terminal.getCurrentPath());
 		mainFrame.setSize(600,350);
-
+		validator = new Validator();
 
 		centerTextArea.setForeground(Color.black);
 		centerTextArea.setFont(new Font("Serif", Font.ITALIC, 14));
-
+		centerTextArea.setSize(600, 350);
 		
 		textArea.setBackground(Color.black);
 		textArea.setForeground(Color.WHITE);
@@ -65,6 +65,7 @@ public class Gui  {
 			public void keyPressed(KeyEvent e) {
 				// TODO Auto-generated method stub
 				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+					validator.Validate(textArea.getText());
 					centerTextArea.append(textArea.getText());
 					textArea.setText(Terminal.getUserName()+" ~ :"+Terminal.getCurrentPath()+"$ ");
 				}
