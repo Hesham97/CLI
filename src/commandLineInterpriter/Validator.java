@@ -34,14 +34,22 @@ public class Validator {
 			if(x.contains(" ")) {
 				args =x.split(Pattern.quote(" "));
 		}
-		if(args[0].equals("cd")) {
+		else if(args[0].equals("cd")) {
 			System.out.println("Here");
 
 			terminal.cd(args[1]);
 		}
-		if(args[0].equals("ls")) {
+		else if(args[0].equals("ls")) {
 			terminal.ls();
 		}
+		else if(args[0].equals("pwd")) {
+			terminal.pwd();
+		}
+		else if(args[0].equals("date")) {
+			terminal.getDate();
+		}
+			
+		
 		
 	}
 	
