@@ -8,12 +8,12 @@ public class Main {
 		// TODO Auto-generated method stub
 		Gui gui = new Gui();
 		Terminal t = new Terminal();
-		try {
+		/*try {
 			System.out.println(t.cat("/home/hesham/Desktop/test.txt","/home/hesham/Desktop/ww.txt"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		//t.cd("2do.txt");
 		//t.ls();
 	}

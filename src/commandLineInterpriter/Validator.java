@@ -43,25 +43,31 @@ public class Validator {
 		}
 		if (args[0].equals("cd")) {
 			terminal.cd(args[1]);
-		}else if (args[0].equals("ls")) {
+		} else if (args[0].equals("ls")) {
 			terminal.ls();
-		}else if (args[0].equals("pwd")) {
+		} else if (args[0].equals("pwd")) {
 			terminal.pwd();
-		}else if (args[0].equals("date")) {
+		} else if (args[0].equals("date")) {
 			terminal.getDate();
-		}else if (args[0].equals("mkdir")) {
+		} else if (args[0].equals("mkdir")) {
 			terminal.mkdir(args[1]);
-		}else if (args[0].equals("rmdir")) {
-			if (args.length>2) {
+		} else if (args[0].equals("rmdir")) {
+			if (args.length > 2) {
 				terminal.rmdir(args[1], args[2]);
-			}else {
+			} else {
 				terminal.rmdir(args[1], "");
 			}
-		}else if (args[0].equals("cp")) {
-				terminal.cp(args[1],args[2]);
-		}else if (args[0].equals("mv")) {
-			terminal.mv(args[1],args[2]);
+		} else if (args[0].equals("cp")) {
+			terminal.cp(args[1], args[2]);
+		} else if (args[0].equals("mv")) {
+			terminal.mv(args[1], args[2]);
+		} else if(args[0].equals("more")) {
+			if(args.length>0) {
+				System.out.println("Hi");
+				terminal.more(args[1]);
+			}else {
+				
+			}
+		}
 	}
 }
-}
-	

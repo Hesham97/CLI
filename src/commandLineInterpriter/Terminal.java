@@ -1,10 +1,14 @@
 package commandLineInterpriter;
 
 import java.nio.file.Files;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -19,8 +23,9 @@ import java.io.IOException;
 public class Terminal {
 
 	private static final String USER_NAME = System.getProperty("user.name");
-	private static final String DEFULT_PATH = "/home/" + USER_NAME + "/" +"Desktop/";
+	private static final String DEFULT_PATH = "/home/" + USER_NAME + "/" + "Desktop/";
 	private static String currentPath;
+	public static int moreCounter;
 
 	//
 	/*
@@ -29,6 +34,7 @@ public class Terminal {
 	 */
 	public Terminal() {
 		currentPath = DEFULT_PATH;
+		moreCounter = 0;
 	}
 
 	public static String getCurrentPath() {
@@ -64,7 +70,7 @@ public class Terminal {
 	}
 
 	public void cd(String path) {
-		//cd ..
+		// cd ..
 		if (path.equals("") || path.equals("~")) {
 			currentPath = DEFULT_PATH;
 		} else if (path.equals("/")) {
@@ -107,7 +113,7 @@ public class Terminal {
 		File[] files = file.listFiles();
 
 		if (file.exists()) {
-			if (files.length	>0) {
+			if (files.length > 0) {
 				if (arg.equals("-r")) {
 					for (File temp : files) {
 						temp.delete();
@@ -134,80 +140,72 @@ public class Terminal {
 
 		if (fileOne.isFile()) {
 
-			if(!fileTwo.isDirectory()&&fileNameTwo.contains(".txt"))
-			if (fileOne.exists()) {
-				System.out.println("enter rerere");
-				this.copy(fileOne.toString(), fileTwo.toString());
-			}
+			if (!fileTwo.isDirectory() && fileNameTwo.contains(".txt"))
+				if (fileOne.exists()) {
+					System.out.println("enter rerere");
+					this.copy(fileOne.toString(), fileTwo.toString());
+				}
 
-			else {
-				return "no such file name " + fileNameOne;
-			}
-			
-			
-			//second case 
-			if(!fileTwo.isFile()&&!fileNameTwo.contains(".txt"))
+				else {
+					return "no such file name " + fileNameOne;
+				}
+
+			// second case
+			if (!fileTwo.isFile() && !fileNameTwo.contains(".txt"))
 				if (fileOne.exists()) {
 					System.out.println("enter lol");
 					fileTwo.mkdir();
-					this.copy(fileOne.toString(), fileTwo.toString() +"/"+ fileNameOne);
+					this.copy(fileOne.toString(), fileTwo.toString() + "/" + fileNameOne);
 
 				}
 
 				else {
-					
+
 					return "no such file name " + fileNameOne;
 				}
-			
 
 		}
-		//case three
+		// case three
 		System.out.println(fileOne.isDirectory());
-		if(fileOne.isDirectory())
-		{
-			if(!fileTwo.isFile()&&!fileNameTwo.contains(".txt")) {
-			 System.out.println("enter here");
-			 
-			this.copydir(fileOne, fileTwo);
-		}
-		 else {
-				
+		if (fileOne.isDirectory()) {
+			if (!fileTwo.isFile() && !fileNameTwo.contains(".txt")) {
+				System.out.println("enter here");
+
+				this.copydir(fileOne, fileTwo);
+			} else {
+
 				return "no such file name " + fileNameOne;
 			}
 		}
 
-		/*else if (fileOne.isFile() ) {
-			if(!fileTwo.isFile()&&!fileNameTwo.contains(".txt"))
-			if (fileOne.exists()) {
-				System.out.println("enter lol");
-				this.copy(fileOne.toString(), fileTwo.toString() + fileNameOne);
-
-			}
-
-			else {
-				return "no such file name " + fileNameOne;
-			}
-
-		}
-
-		else if (fileOne.isDirectory() &&fileTwo.isDirectory()) {
-			this.copydir(fileOne, fileTwo);
-		}*/
+		/*
+		 * else if (fileOne.isFile() ) {
+		 * if(!fileTwo.isFile()&&!fileNameTwo.contains(".txt")) if (fileOne.exists()) {
+		 * System.out.println("enter lol"); this.copy(fileOne.toString(),
+		 * fileTwo.toString() + fileNameOne);
+		 * 
+		 * }
+		 * 
+		 * else { return "no such file name " + fileNameOne; }
+		 * 
+		 * }
+		 * 
+		 * else if (fileOne.isDirectory() &&fileTwo.isDirectory()) {
+		 * this.copydir(fileOne, fileTwo); }
+		 */
 
 		return " ";
 	}
 
 	private void copy(String f1, String f2) throws Exception {
 
-
-		
 		File FileName = new File(f1);
 		FileInputStream in = new FileInputStream(FileName.toString());
 		int filelen = (int) FileName.length();
 		byte Bytes[] = new byte[filelen];
 
 		int x = in.read(Bytes);
-		
+
 		File temp = new File(f2);
 		temp.createNewFile();
 		FileOutputStream out = new FileOutputStream(f2);
@@ -245,30 +243,28 @@ public class Terminal {
 
 		fileOne = new File(currentPath + "/" + fileNameOne);
 		fileTwo = new File(currentPath + "/" + fileNameTwo);
-		
 
-		if (fileOne.isFile()) {	
+		if (fileOne.isFile()) {
 
-			if(!fileTwo.isDirectory()&&fileNameTwo.contains(".txt"))
-			if (fileOne.exists()) {
-				System.out.println("enter rerere");
-				this.copy(fileOne.toString(), fileTwo.toString());
-				fileOne.delete();
-			}
+			if (!fileTwo.isDirectory() && fileNameTwo.contains(".txt"))
+				if (fileOne.exists()) {
+					System.out.println("enter rerere");
+					this.copy(fileOne.toString(), fileTwo.toString());
+					fileOne.delete();
+				}
 
-			else {
-				System.out.println("no");
-				return false;
-			}
-			
-			
-			//second case 
-			System.out.println(!fileTwo.isFile()+" "+fileOne.exists());
-			if(!fileTwo.isFile()&&!fileNameTwo.contains(".txt"))
+				else {
+					System.out.println("no");
+					return false;
+				}
+
+			// second case
+			System.out.println(!fileTwo.isFile() + " " + fileOne.exists());
+			if (!fileTwo.isFile() && !fileNameTwo.contains(".txt"))
 				if (fileOne.exists()) {
 					System.out.println("enter lol");
 					fileTwo.mkdir();
-					this.copy(fileOne.toString(), fileTwo.toString() +"/"+ fileNameOne);
+					this.copy(fileOne.toString(), fileTwo.toString() + "/" + fileNameOne);
 					fileOne.delete();
 
 				}
@@ -276,74 +272,50 @@ public class Terminal {
 				else {
 					System.out.println("two no");
 					return false;
-					
+
 				}
-			
 
 		}
-		//case three
-	//	F
+		// case three
+		// F
 		System.out.println(fileOne.isDirectory());
-		if(!fileOne.isDirectory())
-		{
-			if(!fileTwo.isFile()&&!fileNameTwo.contains(".txt")) {
-			 System.out.println("enter here");
-			 
-			this.copydir(fileOne, fileTwo);
-			this.rmdir(fileNameOne, "-r");
-		}
-		 else {
-				System.out.println("third no");
-				return false;
-			 }
-		}
-		/*
-		if (casesCounter == 1)
-
-		{
-			if (fileOne.exists()) {
-				this.copy(fileOne.toString(), fileTwo.toString());
-				fileOne.delete();
-			}
-
-			else {
-				return false;
-			}
-		}
-
-		if (casesCounter == 2)
-
-		{
-			if (fileOne.exists()) {
-				if (!fileTwo.isDirectory()) {
-					fileTwo.mkdir();
-				}
-
-				this.copy(fileOne.toString(), fileTwo.toString() + fileNameOne);
-				fileOne.delete();
-			}
-
-			else {
-				return false;
-			}
-		}
-
-		if (casesCounter == 3)
-
-		{
-			if (fileOne.isDirectory()) {
-				if (!fileTwo.isDirectory()) {
-					fileTwo.mkdir();
-				}
+		if (!fileOne.isDirectory()) {
+			if (!fileTwo.isFile() && !fileNameTwo.contains(".txt")) {
+				System.out.println("enter here");
 
 				this.copydir(fileOne, fileTwo);
 				this.rmdir(fileNameOne, "-r");
-			}
-
-			else {
+			} else {
+				System.out.println("third no");
 				return false;
 			}
-		}*/
+		}
+		/*
+		 * if (casesCounter == 1)
+		 * 
+		 * { if (fileOne.exists()) { this.copy(fileOne.toString(), fileTwo.toString());
+		 * fileOne.delete(); }
+		 * 
+		 * else { return false; } }
+		 * 
+		 * if (casesCounter == 2)
+		 * 
+		 * { if (fileOne.exists()) { if (!fileTwo.isDirectory()) { fileTwo.mkdir(); }
+		 * 
+		 * this.copy(fileOne.toString(), fileTwo.toString() + fileNameOne);
+		 * fileOne.delete(); }
+		 * 
+		 * else { return false; } }
+		 * 
+		 * if (casesCounter == 3)
+		 * 
+		 * { if (fileOne.isDirectory()) { if (!fileTwo.isDirectory()) { fileTwo.mkdir();
+		 * }
+		 * 
+		 * this.copydir(fileOne, fileTwo); this.rmdir(fileNameOne, "-r"); }
+		 * 
+		 * else { return false; } }
+		 */
 
 		return false;
 
@@ -351,17 +323,44 @@ public class Terminal {
 
 	public String cat(String pathOne) throws FileNotFoundException {
 		File fileOne = new File(pathOne);
-		if(fileOne.exists())
-			return  new Scanner(fileOne).useDelimiter("\\A").next();
-		return null;		
-	
-	}
-	public String cat(String pathOne,String pathTwo) throws FileNotFoundException {
-		File fileOne = new File(pathOne);
-		File fileTwo = new File(pathTwo);
-		if(fileOne.exists()&&fileTwo.exists())
-			return  new Scanner(fileOne).useDelimiter("\\A").next()+new Scanner(fileTwo).useDelimiter("\\A").next();		
-		return null;		
+		if (fileOne.exists())
+			return new Scanner(fileOne).useDelimiter("\\A").next();
+		return null;
+
 	}
 
+	public String cat(String pathOne, String pathTwo) throws FileNotFoundException {
+		File fileOne = new File(pathOne);
+		File fileTwo = new File(pathTwo);
+		if (fileOne.exists() && fileTwo.exists())
+			return new Scanner(fileOne).useDelimiter("\\A").next() + new Scanner(fileTwo).useDelimiter("\\A").next();
+		return null;
+	}
+
+	public static void more(String arg) throws FileNotFoundException, IOException {
+		File file = new File(currentPath + "/" + arg);
+
+		if (file.exists()) {
+
+			try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					if (moreCounter < 10) {
+
+						Gui.centerTextArea.append(line + "\n");
+					}
+					
+					
+					moreCounter++;
+
+				}
+				
+
+			}
+		} else {
+			Gui.centerTextArea.append("NO SUCH FILE OR DIR \n");
+		}
+	}
 }
