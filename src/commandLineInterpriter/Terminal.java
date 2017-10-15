@@ -1,6 +1,8 @@
 package commandLineInterpriter;
 
 import java.nio.file.Files;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.BufferedReader;
@@ -9,7 +11,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 import org.apache.commons.io.FileUtils;
@@ -26,6 +30,8 @@ public class Terminal {
 	private static final String DEFULT_PATH = "/home/" + USER_NAME + "/" + "Desktop/";
 	private static String currentPath;
 	public static int moreCounter;
+	public static boolean escIsPressed;
+	public static String[] moreArray;
 
 	//
 	/*
@@ -35,6 +41,7 @@ public class Terminal {
 	public Terminal() {
 		currentPath = DEFULT_PATH;
 		moreCounter = 0;
+		escIsPressed = false;
 	}
 
 	public static String getCurrentPath() {
@@ -337,30 +344,41 @@ public class Terminal {
 		return null;
 	}
 
-	public static void more(String arg) throws FileNotFoundException, IOException {
-		File file = new File(currentPath + "/" + arg);
+	private void getArray() {
 
+	}
+
+	public static int more(String arg, int index) throws FileNotFoundException, IOException {
+
+		File file = new File(currentPath + "/" + arg);
+		int c = 0;
 		if (file.exists()) {
 
-			try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			BufferedReader in = new BufferedReader(new FileReader(currentPath+"/"+arg));
+			String str;
 
-				String line;
+			List<String> list = new ArrayList<String>();
+			while ((str = in.readLine()) != null) {
+				list.add(str);
+			}
+			moreArray = list.toArray(new String[0]);
+			c = 0;
 
-				while ((line = br.readLine()) != null) {
-					if (moreCounter < 10) {
-
-						Gui.centerTextArea.append(line + "\n");
-					}
-					
-					
+			for (int i = index; i < moreArray.length; i++) {
+				if (c < 10) {
+					Gui.centerTextArea.append(moreArray[i] + "\n");
+					c++;
 					moreCounter++;
-
+				} else if(escIsPressed) {
+					System.out.println("S");
+					c=0;
 				}
-				
 
 			}
 		} else {
 			Gui.centerTextArea.append("NO SUCH FILE OR DIR \n");
 		}
+		return c;
 	}
+
 }

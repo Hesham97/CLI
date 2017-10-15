@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 public class Validator {
 
 	private Terminal terminal;
+	public static String[] args = null;
+
 
 	public Validator() {
 		terminal = new Terminal();
@@ -29,7 +31,6 @@ public class Validator {
 	}
 
 	public void excute(String[] command, String commands) throws Exception {
-		String[] args = null;
 		if (command == null) {
 			args = commands.split(Pattern.quote(" "));
 
@@ -64,7 +65,7 @@ public class Validator {
 		} else if(args[0].equals("more")) {
 			if(args.length>0) {
 				System.out.println("Hi");
-				terminal.more(args[1]);
+				Terminal.more(args[1],0);
 			}else {
 				
 			}
