@@ -30,7 +30,7 @@ public class Gui  {
 
 		centerTextArea.setForeground(Color.black);
 		centerTextArea.setFont(new Font("Serif", Font.ITALIC, 14));
-		centerTextArea.setSize(600, 350);
+		centerTextArea.setEditable(false);
 		
 		textArea.setBackground(Color.black);
 		textArea.setForeground(Color.WHITE);
@@ -65,7 +65,12 @@ public class Gui  {
 			public void keyPressed(KeyEvent e) {
 				// TODO Auto-generated method stub
 				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
-					validator.Validate(textArea.getText());
+					try {
+						validator.Validate(textArea.getText());
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					centerTextArea.append(textArea.getText());
 					textArea.setText(Terminal.getUserName()+" ~ :"+Terminal.getCurrentPath()+"$ ");
 				}
